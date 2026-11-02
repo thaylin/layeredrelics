@@ -1,0 +1,20 @@
+# Layered Relics: Apache/LiteSpeed settings for Namecheap shared hosting.
+# Deployed with the site by .github/workflows/namecheap-ftp.yml.
+
+# Always use HTTPS.
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Friendly "page not found" page.
+ErrorDocument 404 /404.html
+
+# Old website-builder pages -> the matching section of the new single-page site.
+RedirectMatch 301 ^/get-in-touch/?$ /#contact
+RedirectMatch 301 ^/custom-prints/?$ /#custom
+RedirectMatch 301 ^/(shop-creations|3d-printer-help|subpage|webcard|blog-single-page-layout|real-estate-single-page-layout|jobs-1-item|modules-1-item|privacy|legal-notice)(/.*)?$ /
+
+# Don't serve the deploy tool's bookkeeping file or this config.
+<FilesMatch "^(\.ftp-deploy-sync-state\.json|\.htaccess)$">
+  Require all denied
+</FilesMatch>
