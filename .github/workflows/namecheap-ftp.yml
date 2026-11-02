@@ -1,13 +1,15 @@
-# Uploads the static site to Namecheap shared hosting over FTPS on every push to main.
+# Deploys the site to layeredrelics.com (Namecheap shared hosting) over FTPS
+# on every push to main, or by hand from the Actions tab (Run workflow).
 #
-# Switched OFF until configured. To turn it on (see README > "Deploying to Namecheap"):
-#   Settings -> Secrets and variables -> Actions
-#     Secrets:   FTPSERVER, FTPUSER, FTPPASS
-#     Variables: FTP_DEPLOY_ENABLED = true
-#                FTP_SERVER_DIR     = ./   (optional; folder relative to the FTP account's home)
+# Needs these repository secrets (Settings -> Secrets and variables -> Actions):
+#   FTPSERVER  FTP server hostname (the cPanel server name, e.g. serverNNN.web-hosting.com)
+#   FTPUSER    full FTP login, e.g. deploy@layeredrelics.com
+#   FTPPASS    that FTP account's password
+# Optional repository variable:
+#   FTP_SERVER_DIR  folder to upload into, relative to the FTP account's home (default ./)
 #
-# Use a cPanel FTP account whose directory is locked to the target folder
-# (for now: ~/layeredrelics.com/preview), so this workflow can't touch anything else.
+# Use a cPanel FTP account whose directory is locked to the site folder (layeredrelics.com),
+# so this workflow can't touch anything else on the hosting account.
 name: Deploy to Namecheap (FTP)
 
 on:
@@ -24,22 +26,36 @@ concurrency:
 
 jobs:
   deploy:
-    if: vars.FTP_DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
+      - name: Check FTP secrets are set
+        env:
+          FTPSERVER: ${{ secrets.FTPSERVER }}
+          FTPUSER: ${{ secrets.FTPUSER }}
+          FTPPASS: ${{ secrets.FTPPASS }}
+        run: |
+          missing=""
+          [ -n "$FTPSERVER" ] || missing="$missing FTPSERVER"
+          [ -n "$FTPUSER" ] || missing="$missing FTPUSER"
+          [ -n "$FTPPASS" ] || missing="$missing FTPPASS"
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secret(s):$missing. Add them under Settings -> Secrets and variables -> Actions (see README)."
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Assemble site
-        # Same file list as the GitHub Pages workflow: only public site files are uploaded.
+        # Only the public site files are uploaded (not the README, workflows, etc.).
         run: |
           mkdir -p _site
-          cp -r index.html 404.html assets css js data _site/
+          cp -r index.html 404.html .htaccess robots.txt sitemap.xml assets css js data _site/
 
       - name: Upload via FTPS
-        # Only files this action uploaded before are ever deleted on the server
-        # (tracked in .ftp-deploy-sync-state.json), so existing files such as
-        # .well-known/ and cgi-bin/ are left alone.
+        # Only files this action uploaded itself are ever updated or deleted on the server
+        # (tracked in .ftp-deploy-sync-state.json), so other files such as .well-known/
+        # (HTTPS certificate renewal) and cgi-bin/ are left alone.
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTPSERVER }}

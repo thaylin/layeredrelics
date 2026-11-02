@@ -6,7 +6,7 @@
   <title>Page not found — Layered Relics</title>
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#1f2428">
-  <!-- GitHub Pages serves this file for any missing path, possibly from a nested URL,
+  <!-- Served for any missing path (see .htaccess), possibly from a nested URL,
        so the script below rewrites the relative links to point at the site root. -->
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,10 +30,9 @@
     </div>
   </main>
   <script>
-    // Work out the site root: "/layeredrelics/" on github.io project pages, "/" on a custom domain.
+    // The site lives at the domain root, so relative links are rewritten to start with "/".
     (function () {
-      var seg = location.pathname.split("/")[1];
-      var root = location.hostname.endsWith("github.io") && seg ? "/" + seg + "/" : "/";
+      var root = "/";
       document.querySelectorAll("link[href], img[src], a[href]").forEach(function (n) {
         var attr = n.hasAttribute("src") ? "src" : "href";
         var v = n.getAttribute(attr);
