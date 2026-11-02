@@ -1,0 +1,94 @@
+{
+  "_readme": "Edit this file to change the products shown on the site. See README.md > 'Editing products'. Fields: id (unique, no spaces), name, category (dice-towers | decor | gaming), description, price (text shown as-is, e.g. \"$45\" or \"From $30\"), image (relative path), imageAlt, placeholder (true while the image is a stand-in), featured (true = shown first), buyUrl (optional link to Etsy/Shopify listing; leave \"\" to show an 'Ask about this' email button instead).",
+  "categories": [
+    { "id": "dice-towers", "name": "Dice Towers" },
+    { "id": "decor", "name": "Decor" },
+    { "id": "gaming", "name": "Custom Gaming Materials" }
+  ],
+  "products": [
+    {
+      "id": "keep-dice-tower",
+      "name": "Ruined Keep Dice Tower",
+      "category": "dice-towers",
+      "description": "A crumbling castle keep with internal baffles for a satisfying tumble and a walled dice tray at the gate.",
+      "price": "From $45",
+      "image": "assets/products/placeholder-dice-tower.svg",
+      "imageAlt": "Placeholder illustration of a castle-style dice tower with a d20",
+      "placeholder": true,
+      "featured": true,
+      "buyUrl": ""
+    },
+    {
+      "id": "arcane-spire",
+      "name": "Arcane Spire Dice Tower",
+      "category": "dice-towers",
+      "description": "A slim wizard's spire with a glowing-crystal window. Folds flat for game-night travel.",
+      "price": "From $55",
+      "image": "assets/products/placeholder-dice-tower.svg",
+      "imageAlt": "Placeholder illustration of a dice tower",
+      "placeholder": true,
+      "featured": false,
+      "buyUrl": ""
+    },
+    {
+      "id": "relic-lantern",
+      "name": "Relic Crystal Lantern",
+      "category": "decor",
+      "description": "A faceted lantern shell sized for an LED tea light. Casts a warm, layered glow across the table.",
+      "price": "$32",
+      "image": "assets/products/placeholder-decor.svg",
+      "imageAlt": "Placeholder illustration of a faceted crystal lantern",
+      "placeholder": true,
+      "featured": true,
+      "buyUrl": ""
+    },
+    {
+      "id": "dragon-vase",
+      "name": "Dragonscale Vase",
+      "category": "decor",
+      "description": "Spiral-scaled vase printed in silk filament. Decorative only — pairs well with dried or faux florals.",
+      "price": "$28",
+      "image": "assets/products/placeholder-decor.svg",
+      "imageAlt": "Placeholder illustration of a decorative vase",
+      "placeholder": true,
+      "featured": false,
+      "buyUrl": ""
+    },
+    {
+      "id": "ruins-terrain-set",
+      "name": "Ancient Ruins Terrain Set",
+      "category": "gaming",
+      "description": "Arches, broken walls and rubble scaled for 28–32mm miniatures. Unpainted and ready for your brush.",
+      "price": "From $40",
+      "image": "assets/products/placeholder-terrain.svg",
+      "imageAlt": "Placeholder illustration of a ruined stone arch terrain piece",
+      "placeholder": true,
+      "featured": true,
+      "buyUrl": ""
+    },
+    {
+      "id": "condition-tokens",
+      "name": "Condition & Initiative Tokens",
+      "category": "gaming",
+      "description": "Chunky two-colour tokens for conditions, initiative and spell effects. Custom icons available.",
+      "price": "From $15",
+      "image": "assets/products/placeholder-tokens.svg",
+      "imageAlt": "Placeholder illustration of round gaming tokens",
+      "placeholder": true,
+      "featured": true,
+      "buyUrl": ""
+    },
+    {
+      "id": "mini-trays",
+      "name": "Miniature Movement Trays",
+      "category": "gaming",
+      "description": "Magnet-ready movement trays and display bases in your choice of size and colour.",
+      "price": "From $12",
+      "image": "assets/products/placeholder-tokens.svg",
+      "imageAlt": "Placeholder illustration of gaming accessories",
+      "placeholder": true,
+      "featured": false,
+      "buyUrl": ""
+    }
+  ]
+}

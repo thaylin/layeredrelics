@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="lr-logo-title">
+  <title id="lr-logo-title">Layered Relics logo: a filament spool on a pedestal with a copper relic gem</title>
+  <defs>
+    <linearGradient id="lr-copper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffb25e"/>
+      <stop offset=".45" stop-color="#ec8a32"/>
+      <stop offset="1" stop-color="#b65a1c"/>
+    </linearGradient>
+    <linearGradient id="lr-copper-dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8661f"/>
+      <stop offset="1" stop-color="#8f4214"/>
+    </linearGradient>
+    <linearGradient id="lr-teal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2f6f78"/>
+      <stop offset=".45" stop-color="#5fb7c2"/>
+      <stop offset="1" stop-color="#2c646c"/>
+    </linearGradient>
+    <linearGradient id="lr-gem" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a6eef2"/>
+      <stop offset=".5" stop-color="#4fb3bf"/>
+      <stop offset="1" stop-color="#21656d"/>
+    </linearGradient>
+    <linearGradient id="lr-stone-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d464c"/>
+      <stop offset="1" stop-color="#2b3236"/>
+    </linearGradient>
+    <radialGradient id="lr-glow" cx=".5" cy=".55" r=".5">
+      <stop offset="0" stop-color="#4fb3bf" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#4fb3bf" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- soft teal glow -->
+  <circle cx="100" cy="112" r="88" fill="url(#lr-glow)"/>
+
+  <!-- pedestal -->
+  <path d="M100 152 L164 172 L100 192 L36 172 Z" fill="url(#lr-stone-top)"/>
+  <path d="M36 172 L100 192 L100 200 L36 180 Z" fill="#1d2225"/>
+  <path d="M100 192 L164 172 L164 180 L100 200 Z" fill="#262c30"/>
+  <path d="M100 152 L164 172 L100 192 L36 172 Z" fill="none" stroke="#4a545a" stroke-width="1"/>
+
+  <!-- spool: bottom flange -->
+  <ellipse cx="100" cy="128" rx="50" ry="13" fill="url(#lr-copper-dark)"/>
+  <ellipse cx="100" cy="123" rx="50" ry="13" fill="url(#lr-copper)"/>
+
+  <!-- spool: wound filament -->
+  <path d="M64 48 H136 V122 H64 Z" fill="url(#lr-teal)"/>
+  <g stroke="#1f4d54" stroke-width="2" opacity=".75">
+    <path d="M64 58 Q100 64 136 58"/>
+    <path d="M64 68 Q100 74 136 68"/>
+    <path d="M64 78 Q100 84 136 78"/>
+    <path d="M64 88 Q100 94 136 88"/>
+    <path d="M64 98 Q100 104 136 98"/>
+    <path d="M64 108 Q100 114 136 108"/>
+  </g>
+  <g stroke="#9fe3e8" stroke-width="1" opacity=".45">
+    <path d="M70 62 Q100 67 130 62"/>
+    <path d="M70 82 Q100 87 130 82"/>
+    <path d="M70 102 Q100 107 130 102"/>
+  </g>
+
+  <!-- spool: top flange -->
+  <ellipse cx="100" cy="51" rx="52" ry="14" fill="url(#lr-copper-dark)"/>
+  <ellipse cx="100" cy="45" rx="52" ry="14" fill="url(#lr-copper)"/>
+  <ellipse cx="100" cy="45" rx="40" ry="9.5" fill="none" stroke="#ffd29a" stroke-opacity=".45" stroke-width="1.5"/>
+  <ellipse cx="100" cy="45" rx="15" ry="4.8" fill="#1c2023"/>
+
+  <!-- filament strand curling around -->
+  <path d="M64 96 C 36 100, 24 126, 44 142 S 74 156, 70 176" fill="none" stroke="#4fb3bf" stroke-width="4" stroke-linecap="round"/>
+  <path d="M64 96 C 36 100, 24 126, 44 142 S 74 156, 70 176" fill="none" stroke="#a6eef2" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+
+  <!-- relic shield -->
+  <path d="M100 82 L110 92 L128 96 L130 128 Q128 154 100 176 Q72 154 70 128 L72 96 L90 92 Z" fill="#7a3810"/>
+  <path d="M100 78 L110 88 L128 92 L130 124 Q128 150 100 172 Q72 150 70 124 L72 92 L90 88 Z" fill="url(#lr-copper)"/>
+  <path d="M100 94 L118 102 L119 126 Q117 144 100 158 Q83 144 81 126 L82 102 Z" fill="url(#lr-copper-dark)"/>
+  <path d="M100 78 L110 88 L128 92 L130 124" fill="none" stroke="#ffd29a" stroke-width="1.5" stroke-opacity=".7" stroke-linejoin="round"/>
+
+  <!-- teal crystal -->
+  <path d="M100 104 L112 126 L100 150 L88 126 Z" fill="#163a3f"/>
+  <path d="M100 107 L109.5 126 L100 146 L90.5 126 Z" fill="url(#lr-gem)"/>
+  <path d="M100 107 L109.5 126 L100 126 Z" fill="#c9f6f8" opacity=".7"/>
+  <path d="M90.5 126 L100 146 L100 126 Z" fill="#1b555c" opacity=".55"/>
+
+  <!-- sparkles -->
+  <g fill="#6cc4cc">
+    <path d="M154 104 Q155 112 163 113 Q155 114 154 122 Q153 114 145 113 Q153 112 154 104 Z"/>
+    <path d="M30 156 Q30.8 162 36 163 Q30.8 164 30 170 Q29.2 164 24 163 Q29.2 162 30 156 Z"/>
+    <path d="M160 58 Q160.6 62 164 62.5 Q160.6 63 160 67 Q159.4 63 156 62.5 Q159.4 62 160 58 Z" opacity=".8"/>
+  </g>
+  <circle cx="42" cy="108" r="1.8" fill="#6cc4cc" opacity=".8"/>
+</svg>

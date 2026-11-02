@@ -1,0 +1,51 @@
+# Uploads the static site to Namecheap shared hosting over FTPS on every push to main.
+#
+# Switched OFF until configured. To turn it on (see README > "Deploying to Namecheap"):
+#   Settings -> Secrets and variables -> Actions
+#     Secrets:   FTPSERVER, FTPUSER, FTPPASS
+#     Variables: FTP_DEPLOY_ENABLED = true
+#                FTP_SERVER_DIR     = ./   (optional; folder relative to the FTP account's home)
+#
+# Use a cPanel FTP account whose directory is locked to the target folder
+# (for now: ~/layeredrelics.com/preview), so this workflow can't touch anything else.
+name: Deploy to Namecheap (FTP)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: namecheap-ftp
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: vars.FTP_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble site
+        # Same file list as the GitHub Pages workflow: only public site files are uploaded.
+        run: |
+          mkdir -p _site
+          cp -r index.html 404.html assets css js data _site/
+
+      - name: Upload via FTPS
+        # Only files this action uploaded before are ever deleted on the server
+        # (tracked in .ftp-deploy-sync-state.json), so existing files such as
+        # .well-known/ and cgi-bin/ are left alone.
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTPSERVER }}
+          username: ${{ secrets.FTPUSER }}
+          password: ${{ secrets.FTPPASS }}
+          protocol: ftps
+          port: 21
+          local-dir: ./_site/
+          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
