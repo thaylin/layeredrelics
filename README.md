@@ -32,7 +32,7 @@ All asset paths are relative, so the same files work at that address and on a cu
 
 ### Adding the custom domain (layeredrelics.com) later
 
-Do this once you control the DNS for `layeredrelics.com`.
+DNS for `layeredrelics.com` is **not set up yet**. Until it is, the site lives only at `https://thaylin.github.io/layeredrelics/`, and the repo deliberately has no `CNAME` file. Follow these steps once you control the DNS for `layeredrelics.com`.
 
 1. At your domain registrar, add these DNS records:
    - For the apex domain `layeredrelics.com`, add four **A** records pointing to
@@ -41,7 +41,7 @@ Do this once you control the DNS for `layeredrelics.com`.
    - For `www`, add a **CNAME** record pointing to `thaylin.github.io`.
 2. In **Settings → Pages → Custom domain**, enter `layeredrelics.com` and click **Save**. When the DNS check passes, tick **Enforce HTTPS**. The certificate can take up to about an hour to appear.
 3. Optionally, commit a file named `CNAME` (no file extension) at the repo root that contains the single line `layeredrelics.com`. The workflow already copies it into the published site if it exists. With the *GitHub Actions* source, the Settings field is what actually controls the domain, so the file is only a record of the setting.
-4. Update the two absolute URLs in `index.html` (`og:url` and `og:image`) from `https://thaylin.github.io/layeredrelics/` to `https://layeredrelics.com/`, so link previews use the new domain.
+4. Update the two absolute URLs in `index.html` (`og:url` and `og:image`) from `https://thaylin.github.io/layeredrelics/` to `https://layeredrelics.com/`, so link previews use the new domain. If you want the domain shown on the page, add it to the contact card in `index.html` at the same time. It was left out so the page has no link that doesn't work yet.
 5. Optional, recommended: [verify the domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages) in your GitHub account settings, so nobody else can claim it.
 
 ---
@@ -93,7 +93,7 @@ The current product images in `assets/products/placeholder-*.svg` are illustrate
 **Other content to personalise:**
 
 - The **About** section in `index.html` contains placeholder story text, marked by a comment that starts with `OWNER:` and a visible "Placeholder copy" note. Replace the paragraphs with your own words, then delete the `<p class="placeholder-note" …>` line.
-- Contact details appear in `index.html` (contact section and footer) and in `js/config.js` (`email`).
+- Contact is **email only** (`thaylin@gmail.com`). It appears in `index.html` (custom-orders section, contact section and footer) and in `js/config.js` (`email`), which is used for the product buttons and the form fallback. The site intentionally lists no phone number.
 - Brand colours and fonts are the CSS variables at the top of `css/styles.css`.
 
 ## 4. Inquiry form

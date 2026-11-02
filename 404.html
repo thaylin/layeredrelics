@@ -37,7 +37,7 @@
       document.querySelectorAll("link[href], img[src], a[href]").forEach(function (n) {
         var attr = n.hasAttribute("src") ? "src" : "href";
         var v = n.getAttribute(attr);
-        if (!/^(https?:|mailto:|tel:|#|\/)/.test(v)) n.setAttribute(attr, root + v.replace(/^\.\//, ""));
+        if (!/^(https?:|mailto:|#|\/)/.test(v)) n.setAttribute(attr, root + v.replace(/^\.\//, ""));
       });
     })();
   </script>
