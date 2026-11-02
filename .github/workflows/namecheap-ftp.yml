@@ -2,7 +2,7 @@
 #
 # Switched OFF until configured. To turn it on (see README > "Deploying to Namecheap"):
 #   Settings -> Secrets and variables -> Actions
-#     Secrets:   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
+#     Secrets:   FTPSERVER, FTPUSER, FTPPASS
 #     Variables: FTP_DEPLOY_ENABLED = true
 #                FTP_SERVER_DIR     = ./   (optional; folder relative to the FTP account's home)
 #
@@ -42,9 +42,9 @@ jobs:
         # .well-known/ and cgi-bin/ are left alone.
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.FTPSERVER }}
+          username: ${{ secrets.FTPUSER }}
+          password: ${{ secrets.FTPPASS }}
           protocol: ftps
           port: 21
           local-dir: ./_site/

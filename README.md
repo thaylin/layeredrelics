@@ -53,9 +53,9 @@ The *Deploy to Namecheap (FTP)* workflow uploads the site over FTPS (encrypted F
 2. **Find the FTP server name.** Use the server hostname shown in cPanel's *General Information* panel (it looks like `serverNNN.web-hosting.com`), or the host shown under *Configure FTP Client* for the new account. The server hostname is the safest choice for FTPS, because its certificate matches.
 3. **Add the login to GitHub.** Open **thaylin/layeredrelics → Settings → Secrets and variables → Actions**.
    - **Secrets** tab → *New repository secret*, three times:
-     - `FTP_SERVER`: the server name from step 2
-     - `FTP_USERNAME`: the full FTP login, for example `deploy-preview@layeredrelics.com`
-     - `FTP_PASSWORD`: the password from step 1
+     - `FTPSERVER`: the server name from step 2
+     - `FTPUSER`: the full FTP login, for example `deploy-preview@layeredrelics.com`
+     - `FTPPASS`: the password from step 1
    - **Variables** tab → *New repository variable*:
      - `FTP_DEPLOY_ENABLED` = `true`
      - Optionally, `FTP_SERVER_DIR`. Leave it unset to upload into the FTP account's own folder, which is what you want with a locked account.
@@ -71,7 +71,7 @@ When you're happy with `/preview/`:
 
 1. **Back up the current site.** In **cPanel → File Manager**, open your home folder, right-click `layeredrelics.com` → **Compress** → zip, then download the zip.
 2. **Remove the old website-builder files** from `layeredrelics.com/`. That includes `index.html`, `api.php`, `sitemap.xml`, `css/`, `js/`, `images/`, `bundles/`, the template folders and the now-unneeded `preview/`. **Keep `.well-known/` and `cgi-bin/`.**
-3. **Re-target the deploy.** In **cPanel → FTP Accounts**, create an account locked to `layeredrelics.com`, for example `deploy@layeredrelics.com`. Update the `FTP_USERNAME` and `FTP_PASSWORD` secrets to the new account, then delete the old preview account. Run the workflow again.
+3. **Re-target the deploy.** In **cPanel → FTP Accounts**, create an account locked to `layeredrelics.com`, for example `deploy@layeredrelics.com`. Update the `FTPUSER` and `FTPPASS` secrets to the new account, then delete the old preview account. Run the workflow again.
 4. **Show the 404 page for missing URLs.** Add a file named `.htaccess` to the repo root with this line:
    ```
    ErrorDocument 404 /404.html
