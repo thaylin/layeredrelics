@@ -3,6 +3,11 @@
  * This is the one file to edit for contact details and the inquiry form.
  */
 window.LR_CONFIG = {
+  // Product collection section. Off until real product photos are ready.
+  // Set to true to show "The Collection" (built from data/products.json), its nav link
+  // and the "Browse the Collection" button. See README > "Showing the collection".
+  showCollection: false,
+
   // Where inquiries and "Ask about this" emails go.
   email: "thaylin@gmail.com",
 

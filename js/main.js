@@ -2,6 +2,7 @@
  * Layered Relics — site behaviour (no framework, no build step).
  *  - mobile navigation toggle
  *  - product grid rendered from data/products.json, with category filters
+ *    (only when showCollection is true in js/config.js)
  *  - inquiry form: posts to a form service if configured, otherwise opens an email
  */
 (function () {
@@ -10,6 +11,34 @@
   var config = window.LR_CONFIG || {};
   var EMAIL = config.email || "thaylin@gmail.com";
   var PRODUCTS_URL = "data/products.json"; // relative so it works under /layeredrelics/ and on a custom domain
+  var SHOW_COLLECTION = config.showCollection === true;
+
+  /* ---------- Collection on/off ---------- */
+  // [data-collection] elements show only when the collection is on; [data-collection-off] only when it's off.
+  function applyCollectionVisibility() {
+    document.querySelectorAll("[data-collection]").forEach(function (node) { node.hidden = !SHOW_COLLECTION; });
+    document.querySelectorAll("[data-collection-off]").forEach(function (node) { node.hidden = SHOW_COLLECTION; });
+  }
+
+  // Category-card links: with the collection on they jump to it pre-filtered;
+  // with it off they jump to the inquiry form with the matching request type selected.
+  function initCategoryLinks() {
+    document.querySelectorAll("[data-filter-link]").forEach(function (link) {
+      if (SHOW_COLLECTION) {
+        link.href = "#collection";
+        if (link.getAttribute("data-collection-text")) link.textContent = link.getAttribute("data-collection-text");
+      }
+      link.addEventListener("click", function () {
+        if (SHOW_COLLECTION) {
+          setFilter(link.getAttribute("data-filter-link"));
+        } else {
+          var select = document.getElementById("f-type");
+          var type = link.getAttribute("data-request-type");
+          if (select && type) select.value = type;
+        }
+      });
+    });
+  }
 
   /* ---------- Navigation ---------- */
   function initNav() {
@@ -138,12 +167,6 @@
       var btn = e.target.closest("[data-filter]");
       if (btn) setFilter(btn.getAttribute("data-filter"));
     });
-    // Category cards ("See dice towers", ...) jump to the collection pre-filtered.
-    document.querySelectorAll("[data-filter-link]").forEach(function (link) {
-      link.addEventListener("click", function () {
-        setFilter(link.getAttribute("data-filter-link"));
-      });
-    });
   }
 
   function loadProducts() {
@@ -237,8 +260,10 @@
     if (y) y.textContent = String(new Date().getFullYear());
   }
 
+  applyCollectionVisibility();
   initNav();
   initYear();
-  loadProducts();
+  initCategoryLinks();
+  if (SHOW_COLLECTION) loadProducts();
   initForm();
 })();

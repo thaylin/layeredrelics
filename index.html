@@ -48,7 +48,10 @@
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Main">
         <ul>
-          <li><a href="#collection">Collection</a></li>
+          <!-- Items marked data-collection show only when showCollection is true in js/config.js;
+               items marked data-collection-off show only when it is false. -->
+          <li data-collection hidden><a href="#collection">Collection</a></li>
+          <li data-collection-off><a href="#what-we-make">What We Make</a></li>
           <li><a href="#custom">Custom Orders</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -69,15 +72,17 @@
           <h1 id="hero-title" class="hero-title">Layered Relics</h1>
           <p class="hero-sub">Dice Towers, Decor &amp; Custom Gaming Materials — designed, printed and finished by hand, one layer at a time.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#collection">Browse the Collection</a>
-            <a class="btn btn-secondary" href="#custom">Request a Custom Print</a>
+            <a class="btn btn-primary" href="#collection" data-collection hidden>Browse the Collection</a>
+            <a class="btn btn-secondary" href="#custom" data-collection hidden>Request a Custom Print</a>
+            <a class="btn btn-primary" href="#custom" data-collection-off>Request a Custom Print</a>
+            <a class="btn btn-secondary" href="#what-we-make" data-collection-off>See What We Make</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CATEGORIES -->
-    <section class="section categories" aria-labelledby="categories-title">
+    <section class="section categories" id="what-we-make" aria-labelledby="categories-title">
       <div class="container">
         <h2 id="categories-title" class="section-title">What We Forge</h2>
         <ul class="category-grid">
@@ -85,26 +90,27 @@
             <svg class="category-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 42V14h4v-4h4v4h8v-4h4v4h4v28Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 42v-7a4 4 0 0 1 8 0v7M21 20h6v6h-6z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
             <h3>Dice Towers</h3>
             <p>Castles, spires and ruins with baffled interiors so every roll tumbles fair — and looks legendary doing it.</p>
-            <a class="text-link" href="#collection" data-filter-link="dice-towers">See dice towers</a>
+            <a class="text-link" href="#custom" data-request-type="Dice tower" data-filter-link="dice-towers" data-collection-text="See dice towers">Request a dice tower</a>
           </li>
           <li class="category-card">
             <svg class="category-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M18 8h12l2 8c4 6 4 14 0 20l-1 6H17l-1-6c-4-6-4-14 0-20Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 20l4 6-4 6-4-6Z" fill="currentColor"/></svg>
             <h3>Decor</h3>
             <p>Lanterns, vases and shelf relics for the den, the game room or anywhere that could use a little myth.</p>
-            <a class="text-link" href="#collection" data-filter-link="decor">See decor</a>
+            <a class="text-link" href="#custom" data-request-type="Decor piece" data-filter-link="decor" data-collection-text="See decor">Request a decor piece</a>
           </li>
           <li class="category-card">
             <svg class="category-icon" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="24" cy="30" rx="16" ry="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M8 30v5c0 3.3 7.2 6 16 6s16-2.7 16-6v-5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M24 8l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L15 15l6-1Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
             <h3>Custom Gaming Materials</h3>
             <p>Terrain, tokens, miniature bases and table accessories — made to your system, scale and colours.</p>
-            <a class="text-link" href="#collection" data-filter-link="gaming">See gaming materials</a>
+            <a class="text-link" href="#custom" data-request-type="Terrain or scenery" data-filter-link="gaming" data-collection-text="See gaming materials">Request gaming materials</a>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- COLLECTION (rendered from data/products.json by js/main.js) -->
-    <section class="section collection" id="collection" aria-labelledby="collection-title">
+    <!-- COLLECTION (rendered from data/products.json by js/main.js).
+         Hidden until real product photos are ready: set showCollection: true in js/config.js to show it. -->
+    <section class="section collection" id="collection" aria-labelledby="collection-title" data-collection hidden>
       <div class="container">
         <h2 id="collection-title" class="section-title">The Collection</h2>
         <p class="section-intro">A sampling of what comes off the printer. Most pieces can be made in your choice of colours — just ask.</p>

@@ -5,10 +5,10 @@ The website for **Layered Relics**: *Mythic-Grade 3D Prints*, including dice tow
 This is a small static site built with plain HTML, CSS and JavaScript. It has no build step and no framework, and it is hosted for free on GitHub Pages. It is meant as an interim site until the shop moves to a full ecommerce platform such as Shopify or Etsy. The product data is kept in one file so that move is straightforward.
 
 ```
-index.html              The page: hero, categories, collection, custom orders, about, contact
+index.html              The page: hero, categories, collection (hidden for now), custom orders, about, contact
 404.html                "Page not found" page served by GitHub Pages
 css/styles.css          All styles (brand colours are CSS variables at the top)
-js/config.js            Site settings: contact email, form endpoint, buy-button label
+js/config.js            Site settings: collection on/off, contact email, form endpoint, buy-button label
 js/main.js              Menu toggle, product grid + filters, inquiry form
 data/products.json      ← The product list. Edit this to change what's shown.
 assets/logo.svg         Logo (vector)
@@ -46,7 +46,23 @@ DNS for `layeredrelics.com` is **not set up yet**. Until it is, the site lives o
 
 ---
 
-## 2. Editing products
+## 2. Showing the collection
+
+**The Collection is switched off for now**, until real product photos are ready. While it's off:
+
+- the product grid, its **Collection** nav link and the **Browse the Collection** button are hidden;
+- the hero shows **Request a Custom Print** and **See What We Make** instead;
+- each "What We Forge" card links to the inquiry form with the matching request type already selected.
+
+Nothing has been deleted. `data/products.json` and the grid code are still in place.
+
+**To turn it back on:**
+
+1. Add the real photos and update `data/products.json` (see the next two sections).
+2. In `js/config.js`, change `showCollection: false` to `showCollection: true`.
+3. Commit. The nav link, the Browse button, the filtered category links and the product grid all come back automatically.
+
+## 3. Editing products
 
 Everything in **The Collection** comes from `data/products.json`. Each product looks like this:
 
@@ -80,7 +96,7 @@ Everything in **The Collection** comes from `data/products.json`. Each product l
 
 You can edit the file directly on GitHub: open the file, click the pencil icon, then **Commit changes**. The site redeploys automatically. Keep the JSON valid: wrap text in double quotes, put commas between items, and leave no comma after the last item. If the page shows "The collection couldn't load", the JSON usually has a typo. Paste it into <https://jsonlint.com> to find the problem.
 
-## 3. Swapping placeholder images
+## 4. Swapping placeholder images
 
 The current product images in `assets/products/placeholder-*.svg` are illustrated stand-ins. Each one is labelled **PLACEHOLDER**, and the site shows a "Placeholder photo" badge on those products. To use a real photo:
 
@@ -96,7 +112,7 @@ The current product images in `assets/products/placeholder-*.svg` are illustrate
 - Contact is **email only** (`thaylin@gmail.com`). It appears in `index.html` (custom-orders section, contact section and footer) and in `js/config.js` (`email`), which is used for the product buttons and the form fallback. The site intentionally lists no phone number.
 - Brand colours and fonts are the CSS variables at the top of `css/styles.css`.
 
-## 4. Inquiry form
+## 5. Inquiry form
 
 By default the **Commission a Relic** form needs no server. When a visitor submits it, their own email app opens with the message already filled in and addressed to `thaylin@gmail.com`.
 
@@ -109,7 +125,7 @@ To receive submissions directly instead, which also works for visitors who have 
 
 The form already includes a hidden `_gotcha` field that Formspree uses to filter spam.
 
-## 5. Previewing locally
+## 6. Previewing locally
 
 `fetch()` doesn't work from `file://` URLs, so serve the folder with any static server instead of double-clicking `index.html`:
 
@@ -118,10 +134,10 @@ python -m http.server 8000
 # then open http://localhost:8000/
 ```
 
-## 6. Moving to Shopify or Etsy later
+## 7. Moving to Shopify or Etsy later
 
 The site is set up so you can change platforms gradually:
 
-- **Step 1: keep this site and link out.** List each product on Etsy or Shopify, then paste each listing URL into that product's `buyUrl`. The buttons change from *Ask About This* to *Buy Now* and send buyers to the listing. Nothing else needs to change.
+- **Step 1: keep this site and link out.** Turn the collection on (section 2), then list each product on Etsy or Shopify, then paste each listing URL into that product's `buyUrl`. The buttons change from *Ask About This* to *Buy Now* and send buyers to the listing. Nothing else needs to change.
 - **Step 2: full move.** `data/products.json` already contains the fields most shops ask for (name, description, price, category, image). Copy them across by hand, or turn the file into a CSV for Shopify's product import. For example, open the JSON in a converter such as <https://konklone.io/json/> and map the columns to Shopify's CSV template. Reuse the real photos from `assets/products/`, `logo.svg` and the colours in `css/styles.css` for the shop theme.
 - **Step 3: point the domain.** Once the new shop is live, move the `layeredrelics.com` DNS records to the new platform by following its custom-domain guide. Then turn off GitHub Pages in **Settings → Pages**, or keep this site as a simple landing page that links to the shop.
